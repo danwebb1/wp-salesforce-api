@@ -98,12 +98,12 @@ class WP_Sfapi_Oauth{
 
 	public function __construct( $client_id, $client_secret, $redirect_uri, $login_uri, $salesforce_user, $salesforce_pass  ) {
 
-		$this->client_id 	 	 = $client_id;
-		$this->client_secret     = $client_secret;
-		$this->redirect_uri 	 = $redirect_uri;
-		$this->login_uri 	 	 = $login_uri;
-		$this->salesforce_user   = $salesforce_user;
-		$this->salesforce_pass   = $salesforce_pass;
+		$this->client_id 	 	= $client_id;
+		$this->client_secret     	= $client_secret;
+		$this->redirect_uri 	 	= $redirect_uri;
+		$this->login_uri 	 	= $login_uri;
+		$this->salesforce_user   	= $salesforce_user;
+		$this->salesforce_pass   	= $salesforce_pass;
 	}
 
 	
@@ -131,15 +131,15 @@ class WP_Sfapi_Oauth{
 	
 		$token_url      = $this->login_uri . '/services/oauth2/token';
 
-    	$curl = curl_init($token_url);
+    		$curl = curl_init($token_url);
 			curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);	    		
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-	    	curl_setopt($curl, CURLOPT_POST, true);
-	    	curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-	    $json_response = curl_exec($curl);
-	    $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+	    		curl_setopt($curl, CURLOPT_POST, true);
+	    		curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
+	       $json_response = curl_exec($curl);
+	       $status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 			
-		if ( $status != 200 ) {
+	      if ( $status != 200 ) {
 			$args = array(
 				'response' => $json_response, 
 				'content'  => $status
@@ -148,21 +148,21 @@ class WP_Sfapi_Oauth{
 	    curl_close($curl);
 			
 	    
-		$token = json_decode($json_response, true);
+	    $token = json_decode($json_response, true);
 
-		//set instance URL
-		$this->instance_url = $token['instance_url'];
-		//set access token
-		$this->access_token = $token['access_token'];
+	    //set instance URL
+	    $this->instance_url = $token['instance_url'];
+	    //set access token
+	    $this->access_token = $token['access_token'];
 
-		if($this->instance_url && $this->access_token){
-			array_push($this->tokens, $this->instance_url);
-			array_push($this->tokens, $this->access_token);
+	    if($this->instance_url && $this->access_token){
+		array_push($this->tokens, $this->instance_url);
+		array_push($this->tokens, $this->access_token);
 
-			return $this->tokens;
-		}else{
-			return false;
-		}
+		return $this->tokens;
+	     }else{
+		return false;
+	     }
 	}
 }
 	  
