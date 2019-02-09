@@ -5,7 +5,7 @@
 class WP_Sfapi_Public_Admin {
 	/**
 	 * The string used to uniquely identify this plugin
-	 * Set in Integrations_Public
+	 * Set in WP_Sfapi_Public
 	 * Used here for admin page url slug base
 	 *
 	 * @since 1.0.0
